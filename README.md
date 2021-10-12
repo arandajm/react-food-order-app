@@ -1,4 +1,4 @@
-# ReactMeals - React Order Food App 
+# ReactMeals - React Order Food App
 
 ReactMeals is a React SPA application to order food 🍔 🍕 🌭 and manage it into a cart 🛒.
 
@@ -9,9 +9,11 @@ ReactMeals is a React SPA application to order food 🍔 🍕 🌭 and manage it
 - Working with user events and state to create interactive applications.
 - Passing data between components with props (parent to child) and function (child to parent).
 - Working with lists and conditional content.
-- React Hooks.
+- React Hooks (useState, useEffect, useCallback).
 - Component-Scoped Styles with CSS Modules.
-- Working with Context and Reducer
+- Working with Context and Reducer.
+- Creating Custom Hook to fetch data from a RealTime Firebase Database.
+- React Fragments, Portals and Refs.
 
 ## 📝 Installation
 
