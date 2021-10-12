@@ -6,16 +6,21 @@ import CartItem from "./CartItem";
 
 const Cart = ({ onClose }) => {
   // Get CartContext data
-  const { items, addItem, removeItem } = useContext(CartContext);
+  const { totalAmount, items, addItem, removeItem } = useContext(CartContext);
 
+  const fixedTotalAmount = `$${totalAmount.toFixed(2)}`;
+  const hasItems = items.length > 0;
   const addItemHandler = (item) => {
     console.log("add");
     console.log(item);
+    // call addItem context function to add a new item with amount increase to 1
+    addItem({ ...item, amount: 1 });
   };
 
   const removeItemHandler = (id) => {
     console.log("remove");
     console.log(id);
+    removeItem(id);
   };
 
   const cartItems = (
@@ -38,13 +43,13 @@ const Cart = ({ onClose }) => {
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
-        <span>35.62</span>
+        <span>{fixedTotalAmount}</span>
       </div>
       <div className={classes.actions}>
         <button className={classes["button--alt"]} onClick={onClose}>
           Close
         </button>
-        <button className={classes.button}>Order</button>
+        {hasItems && <button className={classes.button}>Order</button>}
       </div>
     </Modal>
   );
