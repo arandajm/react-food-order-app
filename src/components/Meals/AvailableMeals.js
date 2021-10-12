@@ -3,24 +3,20 @@ import Card from "../UI/Card";
 import classes from "./AvailableMeals.module.css";
 import MealItem from "./MealItem/MealItem";
 import spinner from "../../assets/loading.svg";
+import useHttp from "../../hooks/use-http";
 
 const MEALS_URL =
   "https://react-meals-a7512-default-rtdb.asia-southeast1.firebasedatabase.app/meals.json";
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState();
 
+  const { isLoading, error, sendRequest } = useHttp();
+
+  // Fetching data only the first time
   useEffect(() => {
-    const fetchMeals = async () => {
-      const response = await fetch(MEALS_URL);
-
-      if (!response.ok) {
-        throw new Error("Something went wrong!!");
-      }
-
-      const data = await response.json();
+    // Format data function
+    const formatData = (data) => {
       const finalData = [];
       for (const key in data) {
         finalData.push({
@@ -30,16 +26,11 @@ const AvailableMeals = () => {
           price: data[key].price,
         });
       }
-      console.log("data fetched: ", finalData);
       setMeals(finalData);
-      setIsLoading(false);
     };
 
-    fetchMeals().catch((error) => {
-      setIsLoading(false);
-      setError(error.message);
-    });
-  }, []);
+    sendRequest({ url: MEALS_URL }, formatData);
+  }, [sendRequest]);
 
   if (isLoading) {
     return (
