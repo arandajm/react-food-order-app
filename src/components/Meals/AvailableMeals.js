@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "../UI/Card";
 import classes from "./AvailableMeals.module.css";
 import MealItem from "./MealItem/MealItem";
-import spinner from "../../assets/loading.svg";
+import Spinner from "../UI/Spinner";
 import useHttp from "../../hooks/use-http";
 
 const MEALS_URL =
@@ -33,11 +33,7 @@ const AvailableMeals = () => {
   }, [sendRequest]);
 
   if (isLoading) {
-    return (
-      <div className={classes.loading}>
-        <img src={spinner} alt="loading" />
-      </div>
-    );
+    return <Spinner />;
   }
 
   if (error) {

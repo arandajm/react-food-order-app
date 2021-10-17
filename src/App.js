@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
 import Header from "./components/Layout/Header";
-import Meals from "./components/Meals/Meals";
-import NotFound from "./components/Pages/NotFound";
-import Welcome from "./components/Pages/Welcome";
+import Spinner from "./components/UI/Spinner";
 import CartContextProvider from "./store/CartProvider";
+
+// Lazy Loading
+// Split our code into multiple chunks, multiple bundles that are downloaded when they are needed!
+// split the code by route
+const Meals = React.lazy(() => import("./components/Meals/Meals"));
+const Welcome = React.lazy(() => import("./components/Pages/Welcome"));
+const NotFound = React.lazy(() => import("./components/Pages/NotFound"));
 
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
@@ -22,17 +27,19 @@ function App() {
       {cartIsShown && <Cart onClose={hideCartHandler} />}
       <Header onShowCart={showCartHandler} onHideCart={hideCartHandler} />
       <main>
-        <Switch>
-          <Route path="/" exact>
-            <Welcome />
-          </Route>
-          <Route path="/market">
-            <Meals />
-          </Route>
-          <Route path="*">
-            <NotFound />
-          </Route>
-        </Switch>
+        <Suspense fallback={<Spinner />}>
+          <Switch>
+            <Route path="/" exact>
+              <Welcome />
+            </Route>
+            <Route path="/market">
+              <Meals />
+            </Route>
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
+        </Suspense>
       </main>
     </CartContextProvider>
   );
