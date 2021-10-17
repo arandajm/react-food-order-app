@@ -1,0 +1,31 @@
+nav {
+  height: 100%;
+}
+
+nav ul {
+  height: 100%;
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+nav li {
+  margin: 0 1rem;
+  width: 5rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+nav a:hover,
+nav a:active,
+nav a.active {
+  color: white;
+  padding-bottom: 0.25rem;
+  border-bottom: 4px solid white;
+}
