@@ -2,6 +2,9 @@
 
 ReactMeals is a React SPA application to order food 🍔 🍕 🌭 and manage it into a cart 🛒.
 
+![Grabacion-de-pantalla-2021-10-15](https://user-images.githubusercontent.com/24915167/137555351-1721cd7a-4826-47a4-a034-a3739d675dd5.gif)
+
+
 ## 🎯 Features
 
 - Building components with React & building UIs with React.
