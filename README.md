@@ -18,6 +18,8 @@ ReactMeals is a React SPA application to order food 🍔 🍕 🌭 and manage it
 - Creating Custom Hook to fetch data from a RealTime Firebase Database.
 - React Fragments, Portals and Refs.
 - Working with forms and validations.
+- Working with routes using react-router-dom
+- Lazy loading and Suspense to optimize the performance splitting the bundle in chunks.
 
 ## 📝 Installation
 
