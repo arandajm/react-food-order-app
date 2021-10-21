@@ -12,6 +12,11 @@ const HeaderNavigation = () => {
           </NavLink>
         </li>
         <li>
+          <NavLink exact activeClassName={classes.active} to="/auth">
+            Login
+          </NavLink>
+        </li>
+        <li>
           <NavLink exact activeClassName={classes.active} to="/market">
             Market
           </NavLink>

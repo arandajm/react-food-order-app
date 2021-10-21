@@ -2,6 +2,7 @@ import React, { useState, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
 import Header from "./components/Layout/Header";
+import AuthPage from "./components/Pages/AuthPage";
 import Spinner from "./components/UI/Spinner";
 import CartContextProvider from "./store/CartProvider";
 
@@ -31,6 +32,9 @@ function App() {
           <Switch>
             <Route path="/" exact>
               <Welcome />
+            </Route>
+            <Route path="/auth">
+              <AuthPage />
             </Route>
             <Route path="/market">
               <Meals />
