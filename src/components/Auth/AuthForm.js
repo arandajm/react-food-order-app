@@ -22,7 +22,7 @@ const AuthForm = () => {
     const emailValue = emailInputRef.current.value;
     const passwordValue = passwordInputRef.current.value;
 
-    const API_KEY = "AIzaSyCv7QvXJ8CXNSj7HLQkJmd8unc8A_ioFqo";
+    const API_KEY = "";
     const SIGN_IN_PARAM = "signInWithPassword";
     const SIGN_UP_PARAM = "signUp";
     const BASE_URL = "https://identitytoolkit.googleapis.com/v1/accounts:";
@@ -56,10 +56,8 @@ const AuthForm = () => {
         }
       })
       .then((data) => {
-        console.log(data);
         const { idToken } = data;
-        console.log(idToken);
-
+        // Set token into the Auth
         login(idToken);
       })
       .catch((error) => alert(error.message))
