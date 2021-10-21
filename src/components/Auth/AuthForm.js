@@ -1,6 +1,6 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import AuthContext from "../../store/auth-context";
 import Spinner from "../UI/Spinner";
-
 import classes from "./AuthForm.module.css";
 
 const AuthForm = () => {
@@ -8,6 +8,9 @@ const AuthForm = () => {
   const passwordInputRef = useRef();
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Get AuthContext data
+  const { login } = useContext(AuthContext);
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -54,6 +57,10 @@ const AuthForm = () => {
       })
       .then((data) => {
         console.log(data);
+        const { idToken } = data;
+        console.log(idToken);
+
+        login(idToken);
       })
       .catch((error) => alert(error.message))
       .finally(() => setIsLoading(false));

@@ -4,6 +4,7 @@ import Cart from "./components/Cart/Cart";
 import Header from "./components/Layout/Header";
 import AuthPage from "./components/Pages/AuthPage";
 import Spinner from "./components/UI/Spinner";
+import AuthContextProvider from "./store/AuthProvider";
 import CartContextProvider from "./store/CartProvider";
 
 // Lazy Loading
@@ -24,28 +25,30 @@ function App() {
   };
 
   return (
-    <CartContextProvider>
-      {cartIsShown && <Cart onClose={hideCartHandler} />}
-      <Header onShowCart={showCartHandler} onHideCart={hideCartHandler} />
-      <main>
-        <Suspense fallback={<Spinner />}>
-          <Switch>
-            <Route path="/" exact>
-              <Welcome />
-            </Route>
-            <Route path="/auth">
-              <AuthPage />
-            </Route>
-            <Route path="/market">
-              <Meals />
-            </Route>
-            <Route path="*">
-              <NotFound />
-            </Route>
-          </Switch>
-        </Suspense>
-      </main>
-    </CartContextProvider>
+    <AuthContextProvider>
+      <CartContextProvider>
+        {cartIsShown && <Cart onClose={hideCartHandler} />}
+        <Header onShowCart={showCartHandler} onHideCart={hideCartHandler} />
+        <main>
+          <Suspense fallback={<Spinner />}>
+            <Switch>
+              <Route path="/" exact>
+                <Welcome />
+              </Route>
+              <Route path="/auth">
+                <AuthPage />
+              </Route>
+              <Route path="/market">
+                <Meals />
+              </Route>
+              <Route path="*">
+                <NotFound />
+              </Route>
+            </Switch>
+          </Suspense>
+        </main>
+      </CartContextProvider>
+    </AuthContextProvider>
   );
 }
 
