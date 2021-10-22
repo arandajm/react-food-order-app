@@ -29,3 +29,19 @@ nav a.active {
   padding-bottom: 0.25rem;
   border-bottom: 4px solid white;
 }
+
+nav button {
+  font: inherit;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+nav button:hover {
+  background-color: white;
+  color: #8a2b06;
+}

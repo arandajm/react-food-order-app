@@ -1,4 +1,6 @@
 import { useState, useRef, useContext } from "react";
+import { useHistory } from "react-router-dom";
+
 import AuthContext from "../../store/auth-context";
 import Spinner from "../UI/Spinner";
 import classes from "./AuthForm.module.css";
@@ -11,6 +13,7 @@ const AuthForm = () => {
 
   // Get AuthContext data
   const { login } = useContext(AuthContext);
+  const history = useHistory();
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -59,6 +62,11 @@ const AuthForm = () => {
         const { idToken } = data;
         // Set token into the Auth
         login(idToken);
+        if (isLogin) {
+          history.replace("/");
+        } else {
+          setIsLogin(true);
+        }
       })
       .catch((error) => alert(error.message))
       .finally(() => setIsLoading(false));

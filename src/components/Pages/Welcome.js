@@ -1,26 +1,23 @@
-import React from "react";
-import { Link } from "react-router-dom";
-// Include a local img
-import summaryImage from "../../assets/summary.jpg";
+import React, { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import AuthContext from "../../store/auth-context";
 import classes from "./Welcome.module.css";
 
 const Welcome = () => {
+  // Get AuthContext data
+  const { isLoggedIn } = useContext(AuthContext);
   return (
-    <div className={classes.summary}>
-      <h1>Welcome to ReactMeals App!!</h1>
-      <section>
-        <img src={summaryImage} alt="summaryImage" />
-        <div className={classes.items}>
-          <p>With our app you can:</p>
-          <ul>
-            <li>See our menu!</li>
-            <li>Prepare your cart!</li>
-            <li>Order and enjoy our delicious!</li>
-          </ul>
-        </div>
-      </section>
+    <div className={classes.starting}>
+      {isLoggedIn && <h1>Welcome on Board! 🚀</h1>}
+      {!isLoggedIn && (
+        <>
+          <h1>Welcome to ReactMeals!</h1>
+          <h2>To start, please login 🍔</h2>
+        </>
+      )}
       <button className={classes.button}>
-        <Link to="/market">Go to the Market</Link>
+        {isLoggedIn && <NavLink to="/market">Go to the Market</NavLink>}
+        {!isLoggedIn && <NavLink to="/auth">Go to Login</NavLink>}
       </button>
     </div>
   );
