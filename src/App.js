@@ -1,9 +1,10 @@
-import React, { useState, Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { useState, Suspense, useContext } from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
 import Header from "./components/Layout/Header";
 import AuthPage from "./components/Pages/AuthPage";
 import Spinner from "./components/UI/Spinner";
+import AuthContext from "./store/auth-context";
 import AuthContextProvider from "./store/AuthProvider";
 import CartContextProvider from "./store/CartProvider";
 
@@ -16,6 +17,8 @@ const NotFound = React.lazy(() => import("./components/Pages/NotFound"));
 
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
+  // Get AuthContext data
+  const { isLoggedIn } = useContext(AuthContext);
 
   const showCartHandler = () => {
     setCartIsShown(true);
@@ -35,11 +38,14 @@ function App() {
               <Route path="/" exact>
                 <Welcome />
               </Route>
-              <Route path="/auth">
-                <AuthPage />
-              </Route>
+              {!isLoggedIn && (
+                <Route path="/auth">
+                  <AuthPage />
+                </Route>
+              )}
               <Route path="/market">
-                <Meals />
+                {isLoggedIn && <Meals />}
+                {!isLoggedIn && <Redirect to="/auth" />}
               </Route>
               <Route path="*">
                 <NotFound />
