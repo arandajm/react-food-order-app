@@ -3,7 +3,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 import classes from "./HeaderNavigation.module.css";
 
-const HeaderNavigation = () => {
+const HeaderNavigation: React.FC<{}> = () => {
   const history = useHistory();
 
   // Get AuthContext data

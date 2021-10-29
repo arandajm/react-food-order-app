@@ -14,7 +14,7 @@ const Meals = React.lazy(() => import("./components/Meals/Meals"));
 const Welcome = React.lazy(() => import("./components/Pages/Welcome"));
 const NotFound = React.lazy(() => import("./components/Pages/NotFound"));
 
-function App() {
+const App: React.FC<{}> = () => {
   const [cartIsShown, setCartIsShown] = useState(false);
   // Get AuthContext data
   const { isLoggedIn } = useContext(AuthContext);
@@ -53,6 +53,6 @@ function App() {
       </main>
     </CartContextProvider>
   );
-}
+};
 
 export default App;
