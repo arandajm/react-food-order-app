@@ -8,10 +8,12 @@ const HeaderNavigation = () => {
 
   // Get AuthContext data
   const { isLoggedIn, logout } = useContext(AuthContext);
+
   const logoutHandler = () => {
     logout();
     history.replace("/auth");
   };
+
   const renderLoggedInLinks = (
     <>
       <li>

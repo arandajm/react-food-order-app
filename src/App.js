@@ -5,7 +5,6 @@ import Header from "./components/Layout/Header";
 import AuthPage from "./components/Pages/AuthPage";
 import Spinner from "./components/UI/Spinner";
 import AuthContext from "./store/auth-context";
-import AuthContextProvider from "./store/AuthProvider";
 import CartContextProvider from "./store/CartProvider";
 
 // Lazy Loading
@@ -28,33 +27,31 @@ function App() {
   };
 
   return (
-    <AuthContextProvider>
-      <CartContextProvider>
-        {cartIsShown && <Cart onClose={hideCartHandler} />}
-        <Header onShowCart={showCartHandler} onHideCart={hideCartHandler} />
-        <main>
-          <Suspense fallback={<Spinner />}>
-            <Switch>
-              <Route path="/" exact>
-                <Welcome />
+    <CartContextProvider>
+      {cartIsShown && <Cart onClose={hideCartHandler} />}
+      <Header onShowCart={showCartHandler} onHideCart={hideCartHandler} />
+      <main>
+        <Suspense fallback={<Spinner />}>
+          <Switch>
+            <Route path="/" exact>
+              <Welcome />
+            </Route>
+            {!isLoggedIn && (
+              <Route path="/auth">
+                <AuthPage />
               </Route>
-              {!isLoggedIn && (
-                <Route path="/auth">
-                  <AuthPage />
-                </Route>
-              )}
-              <Route path="/market">
-                {isLoggedIn && <Meals />}
-                {!isLoggedIn && <Redirect to="/auth" />}
-              </Route>
-              <Route path="*">
-                <NotFound />
-              </Route>
-            </Switch>
-          </Suspense>
-        </main>
-      </CartContextProvider>
-    </AuthContextProvider>
+            )}
+            <Route path="/market">
+              {isLoggedIn && <Meals />}
+              {!isLoggedIn && <Redirect to="/auth" />}
+            </Route>
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
+        </Suspense>
+      </main>
+    </CartContextProvider>
   );
 }
 
